@@ -19,3 +19,15 @@ npm run build --report
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+参考
+https://bootstrap-vue.js.org/docs/components/alert
+
+
+创建
+https://github.com/simpleman1984/ponzu
+
+ponzu new github.com/nilslice/proj
+ponzu gen content review title:"string" body:"string":richtext rating:"int"
+ponzu build
+ponzu run
