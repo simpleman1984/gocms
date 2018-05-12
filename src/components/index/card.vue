@@ -1,6 +1,6 @@
 <template>
   <b-card title="Card Title"
-            img-src="https://lorempixel.com/600/300/food/5/"
+            img-src="https://placekitten.com/600/300"
             img-alt="Image"
             img-top
             tag="article"

@@ -15,7 +15,7 @@
     <!-- Text slides with image -->
     <b-carousel-slide caption="First slide"
                       text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-                      img-src="https://lorempixel.com/1024/480/technics/2/"
+                      img-src="https://placekitten.com/1024/480"
     ></b-carousel-slide>
 
   </b-carousel>

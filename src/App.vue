@@ -41,17 +41,16 @@
       </b-collapse>
     </b-navbar>
 
-    <b-container class="bv-example-row" :fluid="false">
+    <b-container :fluid="false">
       <carousel></carousel>
 
-      <b-row style="padding-top: 30px;padding-bottom:30px;">
-        <b-col v-for="card in cardList" :key="card.id">
-          <card ></card>
-        </b-col>
-      </b-row>
+      <!--<b-row style="padding-top: 30px;padding-bottom:30px;">-->
+        <!--<b-col v-for="card in cardList" :key="card.id">-->
+          <!--<card ></card>-->
+        <!--</b-col>-->
+      <!--</b-row>-->
     </b-container>
 
-    <pano title="The Title" width="720" height="480" bundle="assets/logo/" format="jpg"></pano>
     <!--<router-view></router-view>-->
   </div>
 </template>
@@ -59,14 +58,12 @@
 <script>
 import carousel from './components/index/carousel'
 import card from './components/index/card'
-import axios from 'axios'
-import pano from 'vue-pano'
+// import axios from 'axios'
 
 export default {
   components: {
     carousel,
-    card,
-    pano
+    card
   },
   data () {
     return {
@@ -74,11 +71,11 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://localhost:8889/api/contents?type=Review')
-      .then((res) => {
-        console.info(res)
-        this.cardList = res.data.data
-      })
+    // axios.get('http://localhost:8889/api/contents?type=Review')
+    //   .then((res) => {
+    //     console.info(res)
+    //     this.cardList = res.data.data
+    //   })
   },
   name: 'app'
 }

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <title>My first three.js app</title>
+  <style>
+    body { margin: 0; }
+    canvas { width: 100%; height: 100% }
+  </style>
+</head>
+<body>
+<script src="../build/three.js"></script>
+<script src="js/Detector.js"></script>
+<script src="js/libs/stats.min.js"></script>
+<script>
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color( 0xf0f0f0 );
+
+  var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
+  // var cameraPerspectiveHelper = new THREE.CameraHelper( camera );
+  // scene.add( cameraPerspectiveHelper );
+
+  var renderer = new THREE.WebGLRenderer();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  document.body.appendChild( renderer.domElement );
+
+  var geometry = new THREE.BoxGeometry( 10, 10, 10 );
+  // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+  var material = new THREE.MeshLambertMaterial( { color: 0xefefef, overdraw: 0.5 } );
+  var cube = new THREE.Mesh( geometry, material );
+  scene.add( cube );
+
+  // camera.position.z = 100;
+  // camera.position.set( 0, 0, 5 );
+  camera.position.set( 30, 70, 80 );
+  camera.lookAt( new THREE.Vector3() );
+
+  var linematerial = new THREE.LineBasicMaterial( { color: 0xffffff } );
+  var linegeometry = new THREE.Geometry();
+  linegeometry.vertices.push(new THREE.Vector3( -10, 0, 0) );
+  linegeometry.vertices.push(new THREE.Vector3( 0, 10, 0) );
+  linegeometry.vertices.push(new THREE.Vector3( 10, 0, 0) );
+  var line = new THREE.Line( linegeometry, linematerial );
+  scene.add( line );
+
+  // Grid
+  var gridHelper = new THREE.GridHelper( 1000, 20 );
+  scene.add( gridHelper );
+
+  // LIGHTS
+  var ambientLight = new THREE.AmbientLight( 0x606060 );
+  scene.add( ambientLight );
+  var directionalLight = new THREE.DirectionalLight( 0x808080 );
+  directionalLight.position.x = 40;
+  directionalLight.position.y = 40;
+  directionalLight.position.normalize();
+  scene.add( directionalLight );
+
+  // STATS
+  stats = new Stats();
+  document.body.appendChild( stats.dom );
+
+  var loader = new THREE.FontLoader();
+  loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+    init( font );
+  } );
+
+  function init(font){
+    var textgeometry = new THREE.TextGeometry( "xuaihua" ,{
+      font: font,
+      size: 5,
+      height: 2,
+      curveSegments: 2
+    });
+    textgeometry.computeBoundingBox();
+    var materials = [
+      new THREE.MeshBasicMaterial( { color: Math.random() * 0xffffff, overdraw: 0.5 } ),
+      new THREE.MeshBasicMaterial( { color: 0x000000, overdraw: 0.5 } )
+    ];
+    var text = new THREE.Mesh( textgeometry, materials );
+    scene.add( text );
+
+    var animate = function () {
+      requestAnimationFrame( animate );
+
+      // cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+
+      line.rotation.y += 0.02;
+
+      renderer.render(scene, camera);
+      stats.update();
+    };
+
+    if (Detector.webgl) {
+      // Initiate function or other initializations here
+      animate();
+    } else {
+      var warning = Detector.getWebGLErrorMessage();
+      document.getElementById('container').appendChild(warning);
+    }
+  }
+</script>
+</body>
+</html>
